@@ -1,0 +1,15 @@
+{
+	"name": "weather-adf-ajh",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "8caa1c8a-2486-4826-96da-b877c6986119",
+		"tenantId": "5b165a26-2c14-41db-aea1-c41f26644c6a"
+	}
+}
