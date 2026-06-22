@@ -1,0 +1,85 @@
+{
+	"name": "daily_weather_pipeline",
+	"properties": {
+		"description": "pipeline for weather_dashboard",
+		"activities": [
+			{
+				"name": "Ingest Bronze",
+				"description": "Notebook to get raw data from weather API. ",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/alejh01@outlook.com/Weather_Project/01_ingest_bronze"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabricksBronzeLink",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Transform Silver",
+				"description": "From raw bronze data into silver to transform",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Ingest Bronze",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 3,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/alejh01@outlook.com/Weather_Project/02_transform_silver"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabrickslinksilver",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Build Gold",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Transform Silver",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Users/alejh01@outlook.com/Weather_Project/03_build_gold"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabrickslinksilver",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": []
+	}
+}
