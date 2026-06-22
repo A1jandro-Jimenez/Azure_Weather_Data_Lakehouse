@@ -1,0 +1,70 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "weather-adf-ajh"
+		},
+		"AzureDatabricksBronzeLink_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabricksBronzeLink'"
+		},
+		"AzureDatabrickslinksilver_accessToken": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accessToken' of 'AzureDatabrickslinksilver'"
+		},
+		"AzureDatabricksBronzeLink_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0620-173953-7968nc0y"
+		},
+		"AzureDatabrickslinksilver_properties_typeProperties_existingClusterId": {
+			"type": "string",
+			"defaultValue": "0620-173953-7968nc0y"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "weather-adf-ajh_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"AzureDatabricksBronzeLink_accessToken": {
+						"value": "[parameters('AzureDatabricksBronzeLink_accessToken')]"
+					},
+					"AzureDatabrickslinksilver_accessToken": {
+						"value": "[parameters('AzureDatabrickslinksilver_accessToken')]"
+					},
+					"AzureDatabricksBronzeLink_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('AzureDatabricksBronzeLink_properties_typeProperties_existingClusterId')]"
+					},
+					"AzureDatabrickslinksilver_properties_typeProperties_existingClusterId": {
+						"value": "[parameters('AzureDatabrickslinksilver_properties_typeProperties_existingClusterId')]"
+					}
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
