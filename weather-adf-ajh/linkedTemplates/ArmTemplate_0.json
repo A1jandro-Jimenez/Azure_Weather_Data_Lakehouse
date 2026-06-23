@@ -182,8 +182,7 @@
 						"interval": 1,
 						"startTime": "2026-06-22T14:30:00",
 						"endTime": "2026-07-04T15:00:00",
-						"timeZone": "Central Standard Time",
-						"schedule": {}
+						"timeZone": "Central Standard Time"
 					}
 				}
 			},
