@@ -165,7 +165,7 @@
 			"properties": {
 				"description": "Automatically run notebooks",
 				"annotations": [],
-				"runtimeState": "Stopped",
+				"runtimeState": "Started",
 				"pipelines": [
 					{
 						"pipelineReference": {
@@ -182,7 +182,8 @@
 						"interval": 1,
 						"startTime": "2026-06-22T14:30:00",
 						"endTime": "2026-07-04T15:00:00",
-						"timeZone": "Central Standard Time"
+						"timeZone": "Central Standard Time",
+						"schedule": {}
 					}
 				}
 			},
